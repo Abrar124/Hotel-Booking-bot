@@ -45,6 +45,20 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest(
       );
     }
 
+
+    function nature(agent) {
+      const opt = agent.parameters.nature;
+      console.log(opt)
+      if(opt == 'a'){
+        agent.add(`Good day! A`);
+      }else if(opt=='b'){
+        agent.add(`Good day! B`);
+      }else{
+        agent.add(`Try again`);
+      }
+    }
+
+
     // Run the proper handler based on the matched Dialogflow intent
     let intentMap = new Map();
     intentMap.set("Default Welcome Intent", welcome);
@@ -64,6 +78,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest(
 
     intentMap.set("Room Package", roomPackage);
     intentMap.set("Hotel", Hotel);
+    intentMap.set("nature", nature);
 
     _agent.handleRequest(intentMap);
   }
